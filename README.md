@@ -334,3 +334,9 @@ pytest tests/ -v
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+## Author
+
+**Sanjay S** — [GitHub](https://github.com/SanjaySundarMurthy)

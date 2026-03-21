@@ -7,7 +7,7 @@ RUN pip install --no-cache-dir build && python -m build
 FROM python:3.12-slim
 
 LABEL maintainer="ssan" \
-      org.opencontainers.image.source="https://github.com/ssan/dep-audit" \
+      org.opencontainers.image.source="https://github.com/SanjaySundarMurthy/dep-audit" \
       org.opencontainers.image.description="dep-audit-cli - DevOps CLI Tool"
 
 RUN groupadd -r appuser && useradd -r -g appuser appuser

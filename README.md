@@ -1,4 +1,8 @@
-# dep-audit-cli
+﻿# dep-audit-cli
+
+[![CI](https://github.com/SanjaySundarMurthy/dep-audit/actions/workflows/ci.yml/badge.svg)](https://github.com/SanjaySundarMurthy/dep-audit/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/pypi/pyversions/dep-audit-cli)](https://pypi.org/project/dep-audit-cli/)
+[![PyPI](https://img.shields.io/pypi/v/dep-audit-cli)](https://pypi.org/project/dep-audit-cli/)
 
 **Comprehensive dependency auditing CLI for vulnerability scanning, license compliance, outdated detection, and dependency tree visualization.**
 
@@ -325,7 +329,7 @@ The health score (0–100) is calculated from:
 ```bash
 git clone https://github.com/SanjaySundarMurthy/dep-audit.git
 cd dep-audit
-pip install -e ".[dev]"
+pip install dep-audit-cli
 pytest tests/ -v
 ```
 
@@ -340,3 +344,50 @@ MIT License — see [LICENSE](LICENSE) for details.
 ## Author
 
 **Sanjay S** — [GitHub](https://github.com/SanjaySundarMurthy)
+
+
+## 🐳 Docker
+
+Run without installing Python:
+
+```bash
+# Build the image
+docker build -t dep-audit .
+
+# Run
+docker run --rm dep-audit --help
+
+# Example with volume mount
+docker run --rm -v ${PWD}:/workspace dep-audit [command] /workspace
+```
+
+Or pull from the container registry:
+
+```bash
+docker pull ghcr.io/SanjaySundarMurthy/dep-audit:latest
+docker run --rm ghcr.io/SanjaySundarMurthy/dep-audit:latest --help
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+Please ensure tests pass before submitting:
+
+```bash
+pip install dep-audit-cli
+pytest -v
+ruff check .
+```
+
+## 🔗 Links
+
+- **PyPI**: [https://pypi.org/project/dep-audit-cli/](https://pypi.org/project/dep-audit-cli/)
+- **GitHub**: [https://github.com/SanjaySundarMurthy/dep-audit](https://github.com/SanjaySundarMurthy/dep-audit)
+- **Issues**: [https://github.com/SanjaySundarMurthy/dep-audit/issues](https://github.com/SanjaySundarMurthy/dep-audit/issues)

@@ -28,7 +28,6 @@ jobs:
 
       - name: Lint with Ruff
         run: ruff check .
-        continue-on-error: true
 
       - name: Run tests
         run: pytest -v --tb=short
@@ -40,6 +39,9 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -57,9 +59,9 @@ jobs:
         run: python -m build
 
       - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: |
-          pip install twine
-          twine upload dist/* --skip-existing

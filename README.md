@@ -302,23 +302,21 @@ repos:
 The health score (0–100) is calculated from:
 
 - **Security Score**: Based on vulnerability count and severity
-  - Critical: -25 points each
-  - High: -15 points each
-  - Medium: -8 points each
-  - Low: -3 points each
+  - Critical: −25 points each
+  - High: −15 points each
+  - Medium: −5 points each
+  - Low: −2 points each
 
 - **Health Score**: Combines security score with:
-  - License issues: -5 points each
-  - Outdated packages: -2 points each
+  - Outdated packages: −2 points each (max −20)
+  - License issues: −3 points each (max −15)
 
 | Grade | Score Range |
 |-------|------------|
 | A+ | 95–100 |
 | A | 90–94 |
-| B+ | 85–89 |
-| B | 80–84 |
-| C+ | 75–79 |
-| C | 70–74 |
+| B | 80–89 |
+| C | 70–79 |
 | D | 60–69 |
 | F | 0–59 |
 
@@ -329,8 +327,41 @@ The health score (0–100) is calculated from:
 ```bash
 git clone https://github.com/SanjaySundarMurthy/dep-audit.git
 cd dep-audit
-pip install dep-audit-cli
+pip install -e ".[dev]"
 pytest tests/ -v
+ruff check .
+```
+
+---
+
+## Project Structure
+
+```
+dep-audit/
+├── dep_audit/
+│   ├── __init__.py          # Package version
+│   ├── __main__.py          # python -m dep_audit support
+│   ├── cli.py               # Click CLI (7 commands)
+│   ├── models.py            # Data models, enums, scoring
+│   ├── parsers.py           # Multi-ecosystem manifest parsers
+│   ├── vulnerability.py     # OSV.dev vulnerability scanning
+│   ├── license.py           # License compliance checking
+│   ├── outdated.py          # Outdated dependency detection
+│   ├── output.py            # Rich terminal rendering
+│   └── tree.py              # Dependency tree builder
+├── tests/                   # 188 tests
+│   ├── conftest.py
+│   ├── test_cli.py
+│   ├── test_license.py
+│   ├── test_models.py
+│   ├── test_outdated.py
+│   ├── test_output.py
+│   ├── test_parsers.py
+│   ├── test_tree.py
+│   └── test_vulnerability.py
+├── Dockerfile
+├── pyproject.toml
+└── README.md
 ```
 
 ---
@@ -381,7 +412,7 @@ Contributions are welcome! Here's how:
 Please ensure tests pass before submitting:
 
 ```bash
-pip install dep-audit-cli
+pip install -e \".[dev]\"
 pytest -v
 ruff check .
 ```
